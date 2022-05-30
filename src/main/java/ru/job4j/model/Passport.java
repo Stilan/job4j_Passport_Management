@@ -1,4 +1,4 @@
-package ru.job4j.job4j_passport_management.model;
+package ru.job4j.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -63,8 +63,12 @@ public class Passport {
 
    @Override
    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+      if (this == o) {
+         return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+         return false;
+      }
       Passport passport = (Passport) o;
       return id == passport.id && series == passport.series && Objects.equals(name, passport.name) && Objects.equals(lastname, passport.lastname) && Objects.equals(created, passport.created);
    }

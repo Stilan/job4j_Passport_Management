@@ -1,12 +1,10 @@
-package ru.job4j.job4j_passport_management.service;
+package ru.job4j.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ru.job4j.job4j_passport_management.model.Passport;
-import ru.job4j.job4j_passport_management.repository.PassportRepository;
+import ru.job4j.model.Passport;
+import ru.job4j.repository.PassportRepository;
 
-import java.util.Date;
 import java.util.List;
 
 @Service

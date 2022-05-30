@@ -1,13 +1,12 @@
-package ru.job4j.job4j_passport_management.service;
+package ru.job4j.service;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import ru.job4j.job4j_passport_management.model.Passport;
+import ru.job4j.model.Passport;
 
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class PassportSecondService {
 
        public Passport getPassportSeria(int id) {
           return client.postForEntity(
-                  url + "/find/{seria}",id, Passport.class
+                  url + "/find/{seria}", id, Passport.class
           ).getBody();
        }
 

@@ -1,8 +1,8 @@
-package ru.job4j.job4j_passport_management.repository;
+package ru.job4j.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import ru.job4j.job4j_passport_management.model.Passport;
+import ru.job4j.model.Passport;
 
 import java.util.List;
 
