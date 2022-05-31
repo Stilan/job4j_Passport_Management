@@ -1,11 +1,10 @@
 create table passport (
-    id serial primary key not null,
-    name varchar(2000),
-    lastname varchar(2000),
+    id serial primary key,
+    name TEXT,
+    lastname TEXT,
     series int,
-    created date
+    number int,
+    created date,
+    UNIQUE (series, number)
 );
 
-select * from passport;
-
-drop table passport;

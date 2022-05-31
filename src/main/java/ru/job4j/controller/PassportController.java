@@ -39,25 +39,22 @@ public class PassportController {
     }
 
     @GetMapping("/find")
-    public List<Passport> getAll() {
+    public List<Passport> findAll() {
         return passportService.findAll();
     }
 
     @GetMapping("/find/{seria}")
-    public ResponseEntity<Passport> getPassportSeria(@PathVariable("seria") int id) {
-         passportService.getPassportSeria(id);
-        return new ResponseEntity<>(
-                this.passportService.getPassportSeria(id),
-                HttpStatus.CREATED);
+    public List<Passport> findPassportsBySeries(@PathVariable("seria") int id) {
+        return passportService.findPassportsBySeries(id);
     }
 
     @GetMapping("/unavaliabe")
     public List<Passport> getPassportBestBeforeDate() {
-      return passportService.getPassportBestBeforeDate();
+      return passportService.findPassportBestBeforeDate();
     }
 
     @GetMapping("/find-replaceable")
     public List<Passport> getPassportDate() {
-        return passportService.getPassportDate();
+        return passportService.findPassportDate();
     }
 }

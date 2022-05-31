@@ -12,8 +12,10 @@ public interface PassportRepository extends CrudRepository<Passport, Integer> {
      Passport findPassportBySeries(Integer id);
 
      @Query(value = "SELECT * from Passport  where created <= current_date", nativeQuery = true)
-     List<Passport> getPassportBestBeforeDate();
+     List<Passport> findPassportBestBeforeDate();
 
      @Query(value = "select * from Passport  where created <= current_date + interval '3 mons'", nativeQuery = true)
-     List<Passport> getPassportDate();
+     List<Passport> findPassportDate();
+
+     List<Passport> findPassportsBySeries(int series);
 }

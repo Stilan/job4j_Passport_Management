@@ -43,10 +43,10 @@ public class PassportSecondService {
        }
 
 
-       public Passport getPassportSeria(int id) {
-          return client.postForEntity(
-                  url + "/find/{seria}", id, Passport.class
-          ).getBody();
+       public List<Passport> findPassportsBySeries(int id) {
+          return client.exchange(url + "/find/" + id,
+                  HttpMethod.GET, null, new ParameterizedTypeReference<List<Passport>>() {
+                  }).getBody();
        }
 
 
@@ -59,13 +59,13 @@ public class PassportSecondService {
         ).getStatusCode() != HttpStatus.NOT_FOUND;
     }
 
-    public List<Passport> getPassportBestBeforeDate() {
+    public List<Passport> findPassportBestBeforeDate() {
         return client.exchange(url + "/unavaliabe",
                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Passport>>() {
                 }).getBody();
     }
 
-    public List<Passport> getPassportDate() {
+    public List<Passport> findPassportDate() {
         return client.exchange(url + "/find-replaceable",
                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Passport>>() {
                 }).getBody();

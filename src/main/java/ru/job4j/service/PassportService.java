@@ -40,16 +40,16 @@ public class PassportService {
          return list;
     }
 
-    public Passport getPassportSeria(int id) {
-         Passport passport = passportRepository.findPassportBySeries(id);
-         return passport;
+    public List<Passport> findPassportsBySeries(int seria) {
+       return passportRepository.findPassportsBySeries(seria);
+
     }
 
-    public List<Passport> getPassportBestBeforeDate() {
-        return passportRepository.getPassportBestBeforeDate();
+    public List<Passport> findPassportBestBeforeDate() {
+        return passportRepository.findPassportBestBeforeDate();
     }
 
-    public List<Passport> getPassportDate() {
-         return passportRepository.getPassportDate();
+    public List<Passport> findPassportDate() {
+         return passportRepository.findPassportDate();
     }
 }

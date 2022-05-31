@@ -15,6 +15,7 @@ public class Passport {
    private String name;
    private String lastname;
    private int series;
+   private int number;
    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
    private Date created;
 
@@ -45,6 +46,14 @@ public class Passport {
       this.lastname = lastname;
    }
 
+   public int getNumber() {
+      return number;
+   }
+
+   public void setNumber(int number) {
+      this.number = number;
+   }
+
    public int getSeries() {
       return series;
    }
@@ -61,6 +70,7 @@ public class Passport {
       this.created = created;
    }
 
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -70,11 +80,11 @@ public class Passport {
          return false;
       }
       Passport passport = (Passport) o;
-      return id == passport.id && series == passport.series && Objects.equals(name, passport.name) && Objects.equals(lastname, passport.lastname) && Objects.equals(created, passport.created);
+      return id == passport.id && series == passport.series && number == passport.number;
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(id, name, lastname, series, created);
+      return Objects.hash(id, series, number);
    }
 }
