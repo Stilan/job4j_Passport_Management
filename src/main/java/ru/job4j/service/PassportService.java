@@ -14,6 +14,7 @@ public class PassportService {
     private PassportRepository passportRepository;
 
      public Passport save(Passport passport) {
+
       return passportRepository.save(passport);
      }
 
@@ -45,11 +46,15 @@ public class PassportService {
 
     }
 
+    public List<Passport> findPassportsByNumber(int number) {
+         return passportRepository.findPassportsByNumber(number);
+    }
+
     public List<Passport> findPassportBestBeforeDate() {
         return passportRepository.findPassportBestBeforeDate();
     }
 
-    public List<Passport> findPassportDate() {
-         return passportRepository.findPassportDate();
+    public List<Passport> findReplacablePassport() {
+         return passportRepository.findReplacablePassport();
     }
 }

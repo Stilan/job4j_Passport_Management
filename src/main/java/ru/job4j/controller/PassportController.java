@@ -20,6 +20,13 @@ public class PassportController {
 
     @PostMapping("/save")
     public ResponseEntity<Passport> create(@RequestBody Passport passport) {
+        if (passportService.findPassportsBySeries(passport.getSeries()) != null
+                || passportService.findPassportsByNumber(passport.getNumber()) != null) {
+            return new ResponseEntity<>(
+                    new Passport(),
+                    HttpStatus.BAD_REQUEST
+                    );
+        }
         return new ResponseEntity<>(
                 this.passportService.save(passport),
                 HttpStatus.CREATED
@@ -34,6 +41,11 @@ public class PassportController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") int id) {
+
+        if (passportService.findPassportById(id) == null) {
+            return new ResponseEntity<>("No records found for id" + id, HttpStatus.NOT_FOUND);
+
+        }
        passportService.delete(id);
        return new ResponseEntity<>("Passport was deleted", HttpStatus.OK);
     }
@@ -44,8 +56,8 @@ public class PassportController {
     }
 
     @GetMapping("/find/{seria}")
-    public List<Passport> findPassportsBySeries(@PathVariable("seria") int id) {
-        return passportService.findPassportsBySeries(id);
+    public List<Passport> findPassportsBySeries(@PathVariable("seria") int seria) {
+        return passportService.findPassportsBySeries(seria);
     }
 
     @GetMapping("/unavaliabe")
@@ -55,6 +67,6 @@ public class PassportController {
 
     @GetMapping("/find-replaceable")
     public List<Passport> getPassportDate() {
-        return passportService.findPassportDate();
+        return passportService.findReplacablePassport();
     }
 }

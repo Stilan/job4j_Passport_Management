@@ -8,3 +8,4 @@ create table passport (
     UNIQUE (series, number)
 );
 
+select * from passport;

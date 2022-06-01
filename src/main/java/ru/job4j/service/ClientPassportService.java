@@ -1,5 +1,6 @@
 package ru.job4j.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -11,13 +12,14 @@ import ru.job4j.model.Passport;
 import java.util.List;
 
 @Service
-public class PassportSecondService {
+public class ClientPassportService {
 
-       private String url = "http://localhost:8080/passport";
+       @Value("http://localhost:8080/passport")
+       private String url;
 
        private final RestTemplate client;
 
-       public PassportSecondService(RestTemplate client) {
+       public ClientPassportService(RestTemplate client) {
               this.client = client;
        }
 
@@ -56,7 +58,7 @@ public class PassportSecondService {
                 HttpMethod.DELETE,
                 HttpEntity.EMPTY,
                 Void.class
-        ).getStatusCode() != HttpStatus.NOT_FOUND;
+        ).getStatusCode() == HttpStatus.OK;
     }
 
     public List<Passport> findPassportBestBeforeDate() {
@@ -65,7 +67,7 @@ public class PassportSecondService {
                 }).getBody();
     }
 
-    public List<Passport> findPassportDate() {
+    public List<Passport> findReplacablePassport() {
         return client.exchange(url + "/find-replaceable",
                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Passport>>() {
                 }).getBody();
