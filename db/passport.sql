@@ -4,8 +4,9 @@ create table passport (
     lastname TEXT,
     series int,
     number int,
-    created date,
+    expiration_date date,
     UNIQUE (series, number)
 );
 
 select * from passport;
+drop table passport;

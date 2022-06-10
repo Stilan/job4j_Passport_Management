@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class ClientPassportService {
 
-       @Value("http://localhost:8080/passport")
+       @Value("${api.endpont}")
        private String url;
 
        private final RestTemplate client;

@@ -17,7 +17,7 @@ public class Passport {
    private int series;
    private int number;
    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-   private Date created;
+   private Date expirationDate;
 
 
 
@@ -64,12 +64,12 @@ public class Passport {
       this.series = series;
    }
 
-   public Date getCreated() {
-      return created;
+   public Date getExpirationDate() {
+      return expirationDate;
    }
 
-   public void setCreated(Date created) {
-      this.created = created;
+   public void setExpirationDate(Date created) {
+      this.expirationDate = created;
    }
 
 
