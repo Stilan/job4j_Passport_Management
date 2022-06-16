@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import ru.job4j.model.Passport;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PassportRepository extends CrudRepository<Passport, Integer> {
 
@@ -19,4 +20,6 @@ public interface PassportRepository extends CrudRepository<Passport, Integer> {
      List<Passport> findPassportsBySeries(int series);
 
      List<Passport> findPassportsByNumber(int number);
+
+    Optional<Passport> findPassportBySeriesAndNumber(int series, int number);
 }

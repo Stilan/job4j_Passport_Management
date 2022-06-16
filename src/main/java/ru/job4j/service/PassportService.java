@@ -17,8 +17,8 @@ public class PassportService {
     private PassportRepository passportRepository;
 
      public Passport save(Passport passport) {
-         if (!findPassportsBySeries(passport.getSeries()).isEmpty()
-                 || findPassportsByNumber(passport.getNumber()).isEmpty()) {
+         if (passportRepository.findPassportBySeriesAndNumber(passport.getSeries(),
+                 passport.getNumber()).isPresent()) {
              throw new IllegalArgumentException();
          }
       return passportRepository.save(passport);
@@ -41,10 +41,10 @@ public class PassportService {
      }
 
     public void delete(int id) {
-        if (findPassportById(id) == null) {
+        Passport passport = findPassportById(id);
+        if (passport == null) {
             throw new NoSuchElementException();
         }
-         Passport passport = findPassportById(id);
          passportRepository.delete(passport);
     }
 
