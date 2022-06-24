@@ -1,7 +1,10 @@
 package ru.job4j.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.model.Passport;
 import ru.job4j.service.PassportService;
@@ -13,6 +16,9 @@ import java.util.List;
 public class PassportController {
 
   private final PassportService passportService;
+
+    @Autowired
+    private KafkaTemplate<Integer, String> template;
 
     public PassportController(PassportService passportService) {
         this.passportService = passportService;
@@ -49,12 +55,22 @@ public class PassportController {
     }
 
     @GetMapping("/unavaliabe")
+    @Scheduled(fixedDelay = 6000)
     public List<Passport> getPassportBestBeforeDate() {
-      return passportService.findPassportBestBeforeDate();
+        List<Passport> passports = passportService.findPassportBestBeforeDate();
+        for (Passport passport : passports) {
+            template.send("massage", passport.getId(), "срок паспорта заканчивается");
+        }
+        return passports;
     }
 
     @GetMapping("/find-replaceable")
+    @Scheduled(fixedDelay = 6000)
     public List<Passport> getPassportDate() {
-        return passportService.findReplacablePassport();
+        List<Passport> passports = passportService.findReplacablePassport();
+        for (Passport passport : passports) {
+            template.send("massage", passport.getId(), "паспорт просрочен");
+        }
+        return passports;
     }
 }
