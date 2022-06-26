@@ -17,8 +17,7 @@ public class PassportController {
 
   private final PassportService passportService;
 
-    @Autowired
-    private KafkaTemplate<Integer, String> template;
+
 
     public PassportController(PassportService passportService) {
         this.passportService = passportService;
@@ -55,22 +54,13 @@ public class PassportController {
     }
 
     @GetMapping("/unavaliabe")
-    @Scheduled(fixedDelay = 6000)
     public List<Passport> getPassportBestBeforeDate() {
-        List<Passport> passports = passportService.findPassportBestBeforeDate();
-        for (Passport passport : passports) {
-            template.send("massage", passport.getId(), "срок паспорта заканчивается");
-        }
-        return passports;
+       return passportService.findPassportBestBeforeDate();
     }
 
     @GetMapping("/find-replaceable")
-    @Scheduled(fixedDelay = 6000)
     public List<Passport> getPassportDate() {
-        List<Passport> passports = passportService.findReplacablePassport();
-        for (Passport passport : passports) {
-            template.send("massage", passport.getId(), "паспорт просрочен");
-        }
-        return passports;
+        return passportService.findReplacablePassport();
+
     }
 }
